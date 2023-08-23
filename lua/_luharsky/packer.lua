@@ -1,0 +1,42 @@
+vim.cmd [[packadd packer.nvim]]
+
+return require('packer').startup(function(use)
+	use('wbthomason/packer.nvim');
+	use("windwp/nvim-autopairs");
+	use("folke/which-key.nvim");
+	use('theprimeagen/harpoon');
+	use('nvim-lua/plenary.nvim');
+	use({ 'nvim-telescope/telescope.nvim', tag = '0.1.2' });
+	use('akinsho/toggleterm.nvim');
+	use('nvim-tree/nvim-web-devicons');
+	use('folke/trouble.nvim');
+	use('nvim-lualine/lualine.nvim');
+	use('MunifTanjim/nui.nvim');
+	use('folke/noice.nvim');
+	use('nvim-telescope/telescope-file-browser.nvim');
+	use({ 'kkharji/sqlite.lua', module = 'sqlite' });
+	use('AckslD/nvim-neoclip.lua');
+	use('akinsho/bufferline.nvim');
+	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' });
+	use('debugloop/telescope-undo.nvim');
+	use('jose-elias-alvarez/null-ls.nvim');
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v2.x',
+		requires = {
+			-- LSP Support
+			{ 'neovim/nvim-lspconfig' },          -- Required
+			{ 'williamboman/mason.nvim' },        -- Optional
+			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
+
+			-- Autocompletion
+			{ 'hrsh7th/nvim-cmp' },  -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
+			{ 'L3MON4D3/LuaSnip' },  -- Required
+			{ 'onsails/lspkind.nvim' },
+			{ 'hrsh7th/cmp-buffer' },
+		}
+	}
+
+	use('4thwithme/chill.nvim');
+end);
