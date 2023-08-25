@@ -2,17 +2,6 @@ local bufferline = require('bufferline');
 
 bufferline.setup {
 	options = {
-		diagnostics_indicator = function(count, level, diagnostics_dict, context)
-			if context.buffer:current() then
-				return ''
-			end
-			if level:match('error') then
-				return ' ' .. vim.g.diagnostic_icons.Error
-			elseif level:match('warning') then
-				return ' ' .. vim.g.diagnostic_icons.Warning
-			end
-			return ''
-		end,
 		mode = "buffers", -- set to "tabs" to only show tabpages instead
 		style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
 		themable = true, -- allows highlight groups to be overriden i.e. sets highlights as default

@@ -34,6 +34,18 @@ telescope.setup({
 			layout_config = {
 				preview_width = 0.7,
 			},
+			mappings = {
+				n = {
+					-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+					-- you want to replicate these defaults and use the following actions. This means
+					-- installing as a dependency of telescope in it's `requirements` and loading this
+					-- extension from there instead of having the separate plugin definition as outlined
+					-- above.
+					["<leader>++"] = require("telescope-undo.actions").yank_additions,
+					["<Leader>--"] = require("telescope-undo.actions").yank_deletions,
+					["<leader>r"] = require("telescope-undo.actions").restore,
+				},
+			},
 		},
 		file_browser = {
 			hijack_netrw = false,

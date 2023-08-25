@@ -1,6 +1,6 @@
 require("toggleterm").setup({
 	direction = 'float',
-	open_mapping = [[<leader>t]],
+	open_mapping = [[<A-t>]],
 	start_in_insert = true,
 	insert_mappings = true,
 	float_opts = {

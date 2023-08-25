@@ -5,9 +5,13 @@ lsp.preset("recommended")
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
 local event = "BufWritePre" -- or "BufWritePost"
 
+lsp.setup_servers({ 'tsserver', 'eslint_d', 'astro', 'lua_ls', 'prismals' })
 lsp.ensure_installed({
 	'tsserver',
 	'astro',
+	'lua_ls',
+	'eslint_d',
+	'prismals'
 });
 
 -- Fix Undefined global 'vim'
@@ -43,6 +47,7 @@ lsp.format_on_save({
 		timeout_ms = 10000,
 	},
 	servers = {
+		['prismals'] = { 'prisma' },
 		['lua_ls'] = { 'lua' },
 		['rust_analyzer'] = { 'rust' },
 		['null-ls'] = { 'javascript', 'typescript', 'typescriptreact' },

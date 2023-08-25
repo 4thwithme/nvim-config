@@ -20,14 +20,13 @@ return require('packer').startup(function(use)
 	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' });
 	use('debugloop/telescope-undo.nvim');
 	use('jose-elias-alvarez/null-ls.nvim');
+	use('prisma/vim-prisma');
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
 		requires = {
 			-- LSP Support
-			{ 'neovim/nvim-lspconfig' },          -- Required
-			{ 'williamboman/mason.nvim' },        -- Optional
-			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
+			{ 'neovim/nvim-lspconfig' }, -- Required
 
 			-- Autocompletion
 			{ 'hrsh7th/nvim-cmp' },  -- Required

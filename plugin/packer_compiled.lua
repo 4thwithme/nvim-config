@@ -119,16 +119,6 @@ _G.packer_plugins = {
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["mason-lspconfig.nvim"] = {
-    loaded = true,
-    path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
-    url = "https://github.com/williamboman/mason-lspconfig.nvim"
-  },
-  ["mason.nvim"] = {
-    loaded = true,
-    path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/mason.nvim",
-    url = "https://github.com/williamboman/mason.nvim"
-  },
   ["noice.nvim"] = {
     loaded = true,
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/noice.nvim",
@@ -215,6 +205,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/trouble.nvim",
     url = "https://github.com/folke/trouble.nvim"
+  },
+  ["vim-prisma"] = {
+    loaded = true,
+    path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/vim-prisma",
+    url = "https://github.com/prisma/vim-prisma"
   },
   ["which-key.nvim"] = {
     loaded = true,
