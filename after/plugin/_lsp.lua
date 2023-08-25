@@ -5,6 +5,10 @@ lsp.preset("recommended")
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
 local event = "BufWritePre" -- or "BufWritePost"
 
+-- need to install manually
+-- npm install -g @prisma/language-server
+-- npm install -g typescript-language-server typescript
+--
 lsp.setup_servers({ 'tsserver', 'eslint_d', 'astro', 'lua_ls', 'prismals' })
 lsp.ensure_installed({
 	'tsserver',
