@@ -52,3 +52,6 @@ vim.keymap.set({ "n", "v" }, "<A-,>", ":BufferLineCyclePrev<CR>", opts)
 vim.keymap.set({ "n", "v" }, "<A->>", ":BufferLineMoveNext<CR>", opts)
 vim.keymap.set({ "n", "v" }, "<A-<>", ":BufferLineMovePrev<CR>", opts)
 vim.keymap.set({ "n", "v" }, "<A-c>", ":BufferLinePickClose<CR>", opts)
+-- diffvew
+vim.keymap.set({ 'n', 'v' }, "<leader>G", ":DiffviewOpen<CR>", opts);
+vim.keymap.set({ 'n', 'v' }, "<leader>CG", ":DiffviewClose<CR>", opts);

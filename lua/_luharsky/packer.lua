@@ -21,6 +21,9 @@ return require('packer').startup(function(use)
 	use('debugloop/telescope-undo.nvim');
 	use('jose-elias-alvarez/null-ls.nvim');
 	use('prisma/vim-prisma');
+	use('mg979/vim-visual-multi');
+	use('sindrets/diffview.nvim');
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',

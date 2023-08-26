@@ -99,6 +99,11 @@ _G.packer_plugins = {
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -210,6 +215,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/vim-prisma",
     url = "https://github.com/prisma/vim-prisma"
+  },
+  ["vim-visual-multi"] = {
+    loaded = true,
+    path = "/Users/andreyp/.local/share/nvim/site/pack/packer/start/vim-visual-multi",
+    url = "https://github.com/mg979/vim-visual-multi"
   },
   ["which-key.nvim"] = {
     loaded = true,
