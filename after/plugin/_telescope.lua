@@ -2,6 +2,10 @@ local telescope = require("telescope");
 local fb_actions = require("telescope._extensions.file_browser.actions");
 local trouble = require("trouble.providers.telescope");
 
+
+telescope.load_extension("file_browser")
+telescope.load_extension('neoclip')
+telescope.load_extension('undo')
 telescope.setup({
 	defaults = {
 		file_ignore_patterns = { "node_modules", "dist" },
@@ -17,7 +21,7 @@ telescope.setup({
 		layout_config = {
 			prompt_position = "top",
 			preview_width = 0.6,
-			width = 0.95,
+			width = 0.8,
 		},
 	},
 	pickers = {
@@ -29,6 +33,8 @@ telescope.setup({
 		undo = {
 			use_delta = true,
 			side_by_side = true,
+			diff_context_lines = vim.o.scrolloff,
+			entry_format = "state #$ID, $STAT, $TIME",
 			layout_strategy = "horizontal",
 			width = 0.9,
 			layout_config = {
@@ -36,14 +42,9 @@ telescope.setup({
 			},
 			mappings = {
 				n = {
-					-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
-					-- you want to replicate these defaults and use the following actions. This means
-					-- installing as a dependency of telescope in it's `requirements` and loading this
-					-- extension from there instead of having the separate plugin definition as outlined
-					-- above.
-					["<C-+>"] = require("telescope-undo.actions").yank_additions,
-					["<C-->"] = require("telescope-undo.actions").yank_deletions,
-					["<C-r>"] = require("telescope-undo.actions").restore,
+					["y"] = require("telescope-undo.actions").yank_additions,
+					["Y"] = require("telescope-undo.actions").yank_deletions,
+					["u"] = require("telescope-undo.actions").restore,
 				},
 			},
 		},
@@ -91,8 +92,6 @@ telescope.setup({
 				},
 			},
 		},
-		telescope.load_extension("file_browser"),
-		telescope.load_extension('neoclip'),
-		telescope.load_extension('undo'),
+
 	}
 });
