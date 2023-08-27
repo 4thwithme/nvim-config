@@ -9,10 +9,10 @@ local event = "BufWritePre" -- or "BufWritePost"
 -- npm install -g @prisma/language-server
 -- npm install -g typescript-language-server typescript
 --
-lsp.setup_servers({ 'tsserver', 'eslint_d', 'astro', 'lua_ls', 'prismals' })
+lsp.setup_servers({ 'tsserver', 'eslint_d', 'astro-ls', 'lua_ls', 'prismals' })
 lsp.ensure_installed({
 	'tsserver',
-	'astro',
+	'astro-ls',
 	'lua_ls',
 	'eslint_d',
 	'prismals'
@@ -65,6 +65,7 @@ lsp.format_on_save({
 		['prismals'] = { 'prisma' },
 		['lua_ls'] = { 'lua' },
 		['rust_analyzer'] = { 'rust' },
+		['astro-ls'] = { 'astro' },
 		['null-ls'] = { 'javascript', 'typescript', 'typescriptreact' },
 	}
 })

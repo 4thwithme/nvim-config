@@ -15,7 +15,7 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 vim.opt.termguicolors = false
 vim.opt.scrolloff = 8
--- vim.opt.signcolumn = "no"
+vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
-vim.opt.colorcolumn = "90"
+vim.opt.colorcolumn = "0"

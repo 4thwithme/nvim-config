@@ -41,9 +41,9 @@ telescope.setup({
 					-- installing as a dependency of telescope in it's `requirements` and loading this
 					-- extension from there instead of having the separate plugin definition as outlined
 					-- above.
-					["<leader>++"] = require("telescope-undo.actions").yank_additions,
-					["<Leader>--"] = require("telescope-undo.actions").yank_deletions,
-					["<leader>r"] = require("telescope-undo.actions").restore,
+					["<C-+>"] = require("telescope-undo.actions").yank_additions,
+					["<C-->"] = require("telescope-undo.actions").yank_deletions,
+					["<C-r>"] = require("telescope-undo.actions").restore,
 				},
 			},
 		},
