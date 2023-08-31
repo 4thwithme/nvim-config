@@ -23,6 +23,9 @@ return require('packer').startup(function(use)
 	use('prisma/vim-prisma');
 	use('mg979/vim-visual-multi');
 	use('sindrets/diffview.nvim');
+	use('simrat39/rust-tools.nvim');
+	use('mfussenegger/nvim-dap');
+	use('wuelnerdotexe/vim-astro');
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -36,9 +39,18 @@ return require('packer').startup(function(use)
 			{ 'hrsh7th/cmp-nvim-lsp' }, -- Required
 			{ 'L3MON4D3/LuaSnip' },  -- Required
 			{ 'onsails/lspkind.nvim' },
+			{ 'hrsh7th/cmp-path' },
 			{ 'hrsh7th/cmp-buffer' },
+			{ 'hrsh7th/vim-vsnip' },
+			{ "hrsh7th/cmp-vsnip" },
+			{ "simrat39/rust-tools.nvim" },
 		}
 	}
+
+	use({
+		"j-hui/fidget.nvim",
+		config = function() require("fidget").setup() end
+	})
 
 	use('4thwithme/chill.nvim');
 end);

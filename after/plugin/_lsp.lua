@@ -8,14 +8,16 @@ local event = "BufWritePre" -- or "BufWritePost"
 -- need to install manually
 -- npm install -g @prisma/language-server
 -- npm install -g typescript-language-server typescript
---
-lsp.setup_servers({ 'tsserver', 'eslint_d', 'astro-ls', 'lua_ls', 'prismals' })
+--  install rust_analizer manually
+
+lsp.setup_servers({ 'rust_analyzer', 'tsserver', 'eslint_d', 'astro', 'lua_ls', 'prismals', })
 lsp.ensure_installed({
+	'rust_analyzer',
 	'tsserver',
-	'astro-ls',
+	'astro',
 	'lua_ls',
 	'eslint_d',
-	'prismals'
+	'prismals',
 });
 
 -- Fix Undefined global 'vim'
@@ -28,7 +30,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
 	["<cr>"] = cmp.mapping.confirm({ select = true }),
 	["<C-c>"] = cmp.mapping.complete(),
-	["<C-ab>"] = cmp.mapping.abort(),
+	["<C-e>"] = cmp.mapping.close(),
 })
 
 lsp.setup_nvim_cmp({
@@ -65,7 +67,7 @@ lsp.format_on_save({
 		['prismals'] = { 'prisma' },
 		['lua_ls'] = { 'lua' },
 		['rust_analyzer'] = { 'rust' },
-		['astro-ls'] = { 'astro' },
+		["astro"] = { 'astro' },
 		['null-ls'] = { 'javascript', 'typescript', 'typescriptreact' },
 	}
 })
@@ -124,5 +126,34 @@ lsp.on_attach(function(client, bufnr)
 		end
 	})
 end)
+
+local nvim_lsp = require 'lspconfig'
+
+nvim_lsp.rust_analyzer.setup({
+	on_attach = (function(client)
+		require 'completion'.on_attach(client)
+	end),
+	settings = {
+		["rust-analyzer"] = {
+			imports = {
+				granularity = {
+					group = "module",
+				},
+				prefix = "self",
+			},
+			cargo = {
+				buildScripts = {
+					enable = true,
+				},
+			},
+			procMacro = {
+				enable = true
+			},
+		}
+	}
+});
+
+nvim_lsp.astro.setup({
+})
 
 lsp.setup()

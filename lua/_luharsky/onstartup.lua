@@ -1,5 +1,6 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.astro_typescript = 'enable'
 vim.api.nvim_create_autocmd("VimEnter",
 	{
 		command =
