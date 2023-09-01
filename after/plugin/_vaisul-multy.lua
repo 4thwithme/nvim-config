@@ -2,15 +2,15 @@
 
 vim.g.VM_theme = 'neon';
 
--- let g:VM_maps = {}
+-- vim.g:VM_maps = {}
 --
 --
 -- let g:VM_maps['Find Under']                  = '<C-n>'
 -- let g:VM_maps['Find Subword Under']          = '<C-n>'
 -- let g:VM_maps["Select All"]                  = '\\A'
 -- let g:VM_maps["Start Regex Search"]          = '\\/'
--- let g:VM_maps["Add Cursor Down"]             = '<C-Down>'
--- let g:VM_maps["Add Cursor Up"]               = '<C-Up>'
+-- g:VM_maps["Add Cursor Down"]             = '<C-Down>'
+-- g:VM_maps["Add Cursor Up"]               = '<C-Up>'
 -- let g:VM_maps["Add Cursor At Pos"]           = '\\\'
 --
 -- let g:VM_maps["Visual Regex"]                = '\\/'

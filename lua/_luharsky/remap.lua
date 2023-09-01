@@ -55,3 +55,5 @@ vim.keymap.set({ "n", "v" }, "<A-c>", ":BufferLinePickClose<CR>", opts)
 -- diffvew
 vim.keymap.set({ 'n', 'v' }, "<leader>G", ":DiffviewOpen<CR>", opts);
 vim.keymap.set({ 'n', 'v' }, "<leader>CG", ":DiffviewClose<CR>", opts);
+--diagnostics
+vim.keymap.set({ 'n', 'v' }, "<leader>D", ":TroubleToggle<CR>", opts, { desc = "[D]iagnostic toggle" })
