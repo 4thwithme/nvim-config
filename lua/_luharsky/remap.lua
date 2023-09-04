@@ -59,3 +59,5 @@ vim.keymap.set({ 'n', 'v' }, "<leader>CG", ":DiffviewClose<CR>", opts);
 vim.keymap.set({ 'n', 'v' }, "<leader>D", ":TroubleToggle<CR>", opts, { desc = "[D]iagnostic toggle" })
 vim.keymap.set({ 'n', 'v' }, "<leader>mr", ":MarkdownPreview<CR>", opts, { desc = "[M]arkdown [R]un" });
 vim.keymap.set({ 'n', 'v' }, "<leader>ms", ":MarkdownPreviewStop<CR>", opts, { desc = "[M]arkdown [S]top" });
+vim.keymap.set({ 'n', 'v' }, "<leader>coe", ":Copilot enable<CR>", opts, { desc = "[Co]pilot [E]nable" });
+vim.keymap.set({ 'n', 'v' }, "<leader>cod", ":Copilot disable<CR>", opts, { desc = "[Co]pilot [D]isable" });

@@ -33,6 +33,8 @@ return require('packer').startup(function(use)
 		setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
 		ft = { "markdown" },
 	});
+	use('lewis6991/gitsigns.nvim');
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
