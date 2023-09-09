@@ -30,7 +30,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
 	["<cr>"] = cmp.mapping.confirm({ select = true }),
 	["<C-c>"] = cmp.mapping.complete(),
-	["<C-e>"] = cmp.mapping.close(),
+	["<Esc>"] = cmp.mapping.close(),
 })
 
 lsp.setup_nvim_cmp({
