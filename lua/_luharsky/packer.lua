@@ -36,6 +36,9 @@ return require('packer').startup(function(use)
 	use('lewis6991/gitsigns.nvim');
 	use('github/copilot.vim');
 
+	use("SmiteshP/nvim-navic");
+	use("utilyre/barbecue.nvim")
+
 	use {
 		'VonHeikemen/lsp-zero.nvim',
 		branch = 'v2.x',
