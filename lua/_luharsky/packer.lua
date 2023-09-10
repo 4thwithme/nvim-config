@@ -34,6 +34,7 @@ return require('packer').startup(function(use)
 		ft = { "markdown" },
 	});
 	use('lewis6991/gitsigns.nvim');
+	use('github/copilot.vim');
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',

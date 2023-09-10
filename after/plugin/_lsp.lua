@@ -20,6 +20,7 @@ lsp.ensure_installed({
 	'prismals',
 });
 
+
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
 
@@ -31,6 +32,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
 	["<cr>"] = cmp.mapping.confirm({ select = true }),
 	["<C-c>"] = cmp.mapping.complete(),
 	["<C-e>"] = cmp.mapping.close(),
+	["<Esc>"] = cmp.mapping.close(),
 })
 
 lsp.setup_nvim_cmp({
