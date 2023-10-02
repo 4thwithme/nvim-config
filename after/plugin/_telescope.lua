@@ -1,7 +1,27 @@
 local telescope = require("telescope");
 local fb_actions = require("telescope._extensions.file_browser.actions");
 local trouble = require("trouble.providers.telescope");
+local previewers = require("telescope.previewers")
 
+local _bad = { ".*%.csv", ".env", ".env.*%", '.*%.lock' } -- Put all filetypes that slow you down in this array
+local bad_files = function(filepath)
+	for _, v in ipairs(_bad) do
+		if filepath:match(v) then
+			return true
+		end
+	end
+
+	return false
+end
+
+local new_maker = function(filepath, bufnr, opts)
+	opts = opts or {}
+	if bad_files(filepath) == true then
+		return
+	else
+		previewers.buffer_previewer_maker(filepath, bufnr, opts)
+	end
+end
 
 telescope.load_extension("file_browser")
 telescope.load_extension('neoclip')
@@ -10,6 +30,7 @@ telescope.setup({
 	defaults = {
 		file_ignore_patterns = { "node_modules", "dist" },
 		layout_strategy = "horizontal",
+		buffer_previewer_maker = new_maker,
 		sorting_strategy = "ascending",
 		vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number',
 			'--column', '--smart-case' },
@@ -19,7 +40,7 @@ telescope.setup({
 			n = { ["<c-t>"] = trouble.open_with_trouble },
 		},
 		layout_config = {
-			prompt_position = "top",
+			prompt_position = "bottom",
 			preview_width = 0.6,
 			width = 0.8,
 		},

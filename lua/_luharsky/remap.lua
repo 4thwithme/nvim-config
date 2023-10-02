@@ -61,3 +61,5 @@ vim.keymap.set({ 'n', 'v' }, "<leader>mr", ":MarkdownPreview<CR>", opts, { desc 
 vim.keymap.set({ 'n', 'v' }, "<leader>ms", ":MarkdownPreviewStop<CR>", opts, { desc = "[M]arkdown [S]top" });
 vim.keymap.set({ 'n', 'v' }, "<leader>coe", ":Copilot enable<CR>", opts, { desc = "[Co]pilot [E]nable" });
 vim.keymap.set({ 'n', 'v' }, "<leader>cod", ":Copilot disable<CR>", opts, { desc = "[Co]pilot [D]isable" });
+--cloak
+vim.keymap.set({ 'n', 'v' }, "<leader>env", ":CloakToggle<CR>", opts, { desc = "[ENV]" });

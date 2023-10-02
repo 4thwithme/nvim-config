@@ -64,5 +64,6 @@ return require('packer').startup(function(use)
 		config = function() require("fidget").setup() end
 	})
 
-	use('4thwithme/chill.nvim');
+	use('laytan/cloak.nvim');
+	use('4thwithme/black.nvim');
 end);
