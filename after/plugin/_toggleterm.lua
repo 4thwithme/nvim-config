@@ -5,7 +5,7 @@ require("toggleterm").setup({
 	insert_mappings = true,
 	float_opts = {
 		border = 'double',
-		width = 160,
+		width = 140,
 		height = 40,
 		zindex = 5,
 	}

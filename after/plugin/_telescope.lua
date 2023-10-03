@@ -41,8 +41,8 @@ telescope.setup({
 		},
 		layout_config = {
 			prompt_position = "bottom",
-			preview_width = 0.6,
-			width = 0.8,
+			preview_width = 0.4,
+			width = 0.9,
 		},
 	},
 	pickers = {
