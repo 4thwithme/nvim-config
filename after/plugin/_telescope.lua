@@ -28,12 +28,12 @@ telescope.load_extension('neoclip')
 telescope.load_extension('undo')
 telescope.setup({
 	defaults = {
-		file_ignore_patterns = { "node_modules", "dist" },
 		layout_strategy = "horizontal",
 		buffer_previewer_maker = new_maker,
 		sorting_strategy = "ascending",
 		vimgrep_arguments = { 'rg', '--hidden', '--color=never', '--no-heading', '--with-filename', '--line-number',
-			'--column', '--smart-case' },
+			'--column', '--smart-case', '--ignore-file',
+			'.gitignore' },
 		winblend = 0,
 		mappings = {
 			i = { ["<C-h>"] = "which_key", ["<c-t>"] = trouble.open_with_trouble },
