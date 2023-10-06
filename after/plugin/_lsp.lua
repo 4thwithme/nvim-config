@@ -157,6 +157,9 @@ nvim_lsp.rust_analyzer.setup({
 });
 
 nvim_lsp.astro.setup({
-})
+	on_attach = (function(client)
+		require 'completion'.on_attach(client)
+	end)
+});
 
 lsp.setup()
