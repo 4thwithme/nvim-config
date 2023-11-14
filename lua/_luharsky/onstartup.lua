@@ -4,3 +4,4 @@ vim.g.astro_typescript = 'enable'
 vim.g.copilot_assume_mapped = true
 vim.cmd([[colorscheme black]]);
 vim.g.copilot_filetypes = { markdown = true }
+require("nvim-treesitter.install").prefer_git = true

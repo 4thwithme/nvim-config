@@ -36,16 +36,33 @@ require('lualine').setup {
 	tabline = {
 		lualine_a = { 'mode' },
 		lualine_b = { 'branch', 'diff', 'diagnostics' },
-		lualine_c = {},
+		lualine_c = {
+			{
+				function()
+					local unsaved = 0
+					for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+						if vim.api.nvim_buf_get_option(buf, 'modified') then
+							unsaved = unsaved + 1
+						end
+					end
+
+					if unsaved == 0 then
+						return ''
+					else
+						return '[[ ' .. unsaved .. ' UNSAVED ]]'
+					end
+				end,
+			},
+		},
 		lualine_x = {
 			{
 				function()
 					local modified = vim.bo.modified
 
 					if modified then
-						return '******************************** MODIFIED *************************************************'
+						return '○○○○○○○○○○○○○○○○○○○○○○○○○○○○>>> [[ MODIFIED ]] <<<○○○○○○○○○○○○○○○○○○○○○○○○○○○○'
 					else
-						return 'SAVED'
+						return '[[ SAVED ]]'
 					end
 				end,
 			},

@@ -6,7 +6,7 @@ return require('packer').startup(function(use)
 	use("folke/which-key.nvim");
 	use('theprimeagen/harpoon');
 	use('nvim-lua/plenary.nvim');
-	use({ 'nvim-telescope/telescope.nvim', tag = '0.1.2' });
+	use({ 'nvim-telescope/telescope.nvim', tag = '0.1.4' });
 	use('akinsho/toggleterm.nvim');
 	use('nvim-tree/nvim-web-devicons');
 	use('folke/trouble.nvim');
