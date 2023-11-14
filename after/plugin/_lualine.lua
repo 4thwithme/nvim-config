@@ -19,25 +19,44 @@ require('lualine').setup {
 	},
 	sections = {
 		lualine_a = { 'mode' },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_b = {},
 		lualine_c = { 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { 'encoding', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
 	},
 	inactive_sections = {
 		lualine_a = { 'mode' },
-		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_b = {},
 		lualine_c = { 'filename' },
-		lualine_x = { 'encoding', 'fileformat', 'filetype' },
+		lualine_x = { 'encoding', 'filetype' },
 		lualine_y = { 'progress' },
 		lualine_z = { 'location' }
 	},
 	tabline = {
+		lualine_a = { 'mode' },
+		lualine_b = { 'branch', 'diff', 'diagnostics' },
+		lualine_c = {},
+		lualine_x = {
+			{
+				function()
+					local modified = vim.bo.modified
+
+					if modified then
+						return '******************************** MODIFIED *************************************************'
+					else
+						return 'SAVED'
+					end
+				end,
+			},
+		},
+		lualine_y = {},
+		lualine_z = { 'mode' }
 	},
 	winbar = {
 	},
 	inactive_winbar = {
 	},
-	extensions = {}
+	extensions = {
+	}
 }

@@ -3,7 +3,7 @@ local fb_actions = require("telescope._extensions.file_browser.actions");
 local trouble = require("trouble.providers.telescope");
 local previewers = require("telescope.previewers")
 
-local _bad = { ".*%.csv", ".env", ".env.*%", '.*%.lock' } -- Put all filetypes that slow you down in this array
+local _bad = { ".*%.csv", ".env", ".env.*%", '.*%.lock' }
 local bad_files = function(filepath)
 	for _, v in ipairs(_bad) do
 		if filepath:match(v) then

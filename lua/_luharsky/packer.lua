@@ -23,9 +23,7 @@ return require('packer').startup(function(use)
 	use('mg979/vim-visual-multi');
 	use('sindrets/diffview.nvim');
 	use('simrat39/rust-tools.nvim');
-	use('mfussenegger/nvim-dap');
 	use('wuelnerdotexe/vim-astro');
-	use("startup-nvim/startup.nvim");
 	use({
 		"iamcco/markdown-preview.nvim",
 		run = "cd app && npm install",
@@ -57,11 +55,6 @@ return require('packer').startup(function(use)
 			{ "simrat39/rust-tools.nvim" },
 		}
 	}
-
-	use({
-		"j-hui/fidget.nvim",
-		config = function() require("fidget").setup() end
-	})
 
 	use('laytan/cloak.nvim');
 	use('4thwithme/black.nvim');
