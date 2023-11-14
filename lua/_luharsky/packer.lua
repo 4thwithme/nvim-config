@@ -16,7 +16,6 @@ return require('packer').startup(function(use)
 	use('nvim-telescope/telescope-file-browser.nvim');
 	use({ 'kkharji/sqlite.lua', module = 'sqlite' });
 	use('AckslD/nvim-neoclip.lua');
-	use('akinsho/bufferline.nvim');
 	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' });
 	use('debugloop/telescope-undo.nvim');
 	use('jose-elias-alvarez/null-ls.nvim');
