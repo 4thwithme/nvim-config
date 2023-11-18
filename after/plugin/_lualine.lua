@@ -1,6 +1,6 @@
 require('lualine').setup {
 	options = {
-		icons_enabled = true,
+		icons_enabled = false,
 		theme = 'auto',
 		component_separators = { left = '', right = '' },
 		section_separators = { left = '', right = '' },
@@ -54,7 +54,8 @@ require('lualine').setup {
 				end,
 			},
 		},
-		lualine_x = {
+		lualine_x = {},
+		lualine_y = {
 			{
 				function()
 					local modified = vim.bo.modified
@@ -67,7 +68,6 @@ require('lualine').setup {
 				end,
 			},
 		},
-		lualine_y = {},
 		lualine_z = { 'mode' }
 	},
 	winbar = {

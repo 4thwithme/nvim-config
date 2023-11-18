@@ -18,7 +18,6 @@ return require('packer').startup(function(use)
 	use('AckslD/nvim-neoclip.lua');
 	use({ 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' });
 	use('debugloop/telescope-undo.nvim');
-	use('jose-elias-alvarez/null-ls.nvim');
 	use('prisma/vim-prisma');
 	use('mg979/vim-visual-multi');
 	use('sindrets/diffview.nvim');
@@ -32,6 +31,12 @@ return require('packer').startup(function(use)
 	});
 	use('lewis6991/gitsigns.nvim');
 	use('github/copilot.vim');
+
+	use({
+		'prettier/vim-prettier',
+		run = 'npm install',
+		ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html' },
+	});
 
 	use("SmiteshP/nvim-navic");
 	use("utilyre/barbecue.nvim")

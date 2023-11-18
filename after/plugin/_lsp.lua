@@ -1,5 +1,5 @@
 local lsp = require('lsp-zero').preset({})
-
+local nvim_lsp = require('lspconfig');
 lsp.preset("recommended")
 
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
@@ -29,7 +29,10 @@ local on_attach = function(client, bufnr)
 			buffer = bufnr,
 			group = group,
 			callback = function()
-				vim.lsp.buf.format({ bufnr = bufnr, async = false })
+				-- vim.lsp.buf.format({ bufnr = bufnr, async = false })
+				
+				-- run prettier command
+				vim.cmd(":PrettierAsync<CR>")
 			end,
 
 			desc = "[lsp] format on save",
@@ -55,18 +58,19 @@ end
 -- need to install manually
 -- npm install -g @prisma/language-server
 -- npm install -g typescript-language-server typescript
---  install rust_analizer manually
+-- install rust_analizer manually
+-- npm i -g vscode-langservers-extracted
 
-lsp.setup_servers({ 'rust_analyzer', 'tsserver', 'eslint_d', 'astro', 'lua_ls', 'prismals', })
+
+lsp.setup_servers({ 'rust_analyzer', 'tsserver', 'eslint', 'astro', 'lua_ls', 'prismals', })
 lsp.ensure_installed({
 	'rust_analyzer',
 	'tsserver',
 	'astro',
 	'lua_ls',
-	'eslint_d',
+	'eslint',
 	'prismals',
 });
-
 
 -- Fix Undefined global 'vim'
 lsp.nvim_workspace()
@@ -88,17 +92,16 @@ lsp.setup_nvim_cmp({
 lsp.set_preferences({
 	suggest_lsp_servers = false,
 	sign_icons = {
-		error = "",
-		warning = "",
-		hint = "",
-		information = "",
-		other = "",
+		error = "E",
+		warning = "W",
+		hint = "H",
+		information = "I",
+		other = "O",
 	}
 })
 
 vim.diagnostic.config({
 	underline = true,
-
 	virtual_text = false,
 	severity_sort = true,
 	float = {
@@ -115,13 +118,13 @@ lsp.format_on_save({
 		['prismals'] = { 'prisma' },
 		['lua_ls'] = { 'lua' },
 		['rust_analyzer'] = { 'rust' },
-		["astro"] = { 'astro' },
-		['null-ls'] = { 'javascript', 'typescript', 'typescriptreact' },
+		['astro'] = { 'astro' },
+		['tsserver'] = { 'javascript', 'typescript', 'typescriptreact' },
+		['eslint'] = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'scss', 'sass', 'html', 'css' },
 	}
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-
+local signs = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " }
 
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
@@ -129,8 +132,6 @@ for type, icon in pairs(signs) do
 end
 
 lsp.on_attach(on_attach)
-
-local nvim_lsp = require 'lspconfig'
 
 nvim_lsp.rust_analyzer.setup({
 	on_attach = (function(client)
@@ -157,6 +158,12 @@ nvim_lsp.rust_analyzer.setup({
 });
 
 nvim_lsp.astro.setup({
+	on_attach = (function(client)
+		require 'completion'.on_attach(client)
+	end)
+});
+
+nvim_lsp.eslint.setup({
 	on_attach = (function(client)
 		require 'completion'.on_attach(client)
 	end)
