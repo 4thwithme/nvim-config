@@ -35,7 +35,8 @@ return require('packer').startup(function(use)
 	use({
 		'prettier/vim-prettier',
 		run = 'npm install',
-		ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html' },
+		ft = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'css', 'less', 'scss', 'json', 'graphql',
+			'markdown', 'vue', 'svelte', 'yaml', 'html' },
 	});
 
 	use("SmiteshP/nvim-navic");

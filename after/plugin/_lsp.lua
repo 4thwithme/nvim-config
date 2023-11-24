@@ -29,10 +29,21 @@ local on_attach = function(client, bufnr)
 			buffer = bufnr,
 			group = group,
 			callback = function()
-				-- vim.lsp.buf.format({ bufnr = bufnr, async = false })
-				
-				-- run prettier command
-				vim.cmd(":PrettierAsync<CR>")
+				if vim.bo.filetype == "javascript"
+						or vim.bo.filetype == "typescript"
+						or vim.bo.filetype == "typescriptreact"
+						or vim.bo.filetype == "javascriptreact"
+						or vim.bo.filetype == "scss"
+						or vim.bo.filetype == "sass"
+						or vim.bo.filetype == "css"
+						or vim.bo.filetype == "html"
+						or vim.bo.filetype == "json"
+						or vim.bo.filetype == "hbs"
+				then
+					vim.cmd(":PrettierAsync<CR>")
+				else
+					vim.lsp.buf.format({ bufnr = bufnr, async = false })
+				end
 			end,
 
 			desc = "[lsp] format on save",
