@@ -1,80 +1,77 @@
-local lsp = require('lsp-zero').preset({})
-local nvim_lsp = require('lspconfig');
-lsp.preset("recommended")
+local lspconfig = require('lspconfig');
+local lsp_zero = require('lsp-zero').preset({})
+local capabilities = require("cmp_nvim_lsp").default_capabilities();
+local cmp = require('cmp');
+
+lsp_zero.preset("recommended");
+
 
 local group = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = false })
-local event = "BufWritePre" -- or "BufWritePost"
 
-local on_attach = function(client, bufnr)
-	local opts = { buffer = bufnr, remap = false }
+local on_attach_mappings = function(client, bufnr)
+	local opts = { remap = false, silent = true, buffer = bufnr }
 
-	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts);
+	vim.keymap.set('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts, { desc = '[g]o to [d]eclaration' });
+	vim.keymap.set('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts, { desc = '[g]o to [d]efinition' });
+	vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts, { desc = 'show [k]ind' });
+	vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts, { desc = '[g]o to [i]mplementation' });
+	vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.reference()<CR>', opts, { desc = '[g]o to [r]eference' });
+	vim.keymap.set('n', 'gA', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts, { desc = '[g]o to [a]ction' });
+	vim.keymap.set('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts, { desc = '[r]ename' });
+	vim.keymap.set('n', 'gS', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts, { desc = '[g]o to [s]ignature' });
+	vim.keymap.set('n', 'gT', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts, { desc = '[g]o to [t]ype definition' });
+end;
 
-	if client.supports_method("textDocument/formatting") then
-		vim.keymap.set("n", "<Leader>lf", function()
-			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-		end, { buffer = bufnr, desc = "[lsp] format" })
-
-		-- format on save
-		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
-		vim.api.nvim_create_autocmd(event, {
-			buffer = bufnr,
-			group = group,
-			callback = function()
-				if vim.bo.filetype == "javascript"
-						or vim.bo.filetype == "typescript"
-						or vim.bo.filetype == "typescriptreact"
-						or vim.bo.filetype == "javascriptreact"
-						or vim.bo.filetype == "scss"
-						or vim.bo.filetype == "sass"
-						or vim.bo.filetype == "css"
-						or vim.bo.filetype == "html"
-						or vim.bo.filetype == "json"
-						or vim.bo.filetype == "hbs"
-				then
-					vim.cmd(":PrettierAsync<CR>")
-				else
-					vim.lsp.buf.format({ bufnr = bufnr, async = false })
-				end
-			end,
-
-			desc = "[lsp] format on save",
-		})
-	end
-
+local on_cursor_hold = function()
 	vim.api.nvim_create_autocmd("CursorHold", {
 		buffer = bufnr,
 		callback = function()
-			local opts2 = {
+			vim.diagnostic.open_float(nil, {
 				focusable = false,
 				close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
 				border = 'rounded',
 				source = 'always',
 				prefix = ' ○ ',
 				scope = 'cursor',
-			}
-			vim.diagnostic.open_float(nil, opts2)
+			})
 		end
 	})
-end
+end;
+
+vim.diagnostic.config({
+	underline = true,
+	virtual_text = false,
+	severity_sort = true,
+	float = { source = "always" },
+	update_in_insert = false,
+	signs = {
+		error = { text = "E" },
+		warning = { text = "W" },
+		hint = { text = "H" },
+		information = { text = "I" },
+	}
+});
+
+local cmp_mappings = lsp_zero.defaults.cmp_mappings({
+	['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+	['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+	["<cr>"] = cmp.mapping.confirm({ select = true }),
+	["<C-c>"] = cmp.mapping.complete(),
+	["<Esc>"] = cmp.mapping.close(),
+});
+
+lsp_zero.setup_nvim_cmp({
+	mapping = cmp_mappings
+});
+
 
 -- need to install manually
 -- npm install -g @prisma/language-server
 -- npm install -g typescript-language-server typescript
 -- install rust_analizer manually
 -- npm i -g vscode-langservers-extracted
-
-
-lsp.setup_servers({ 'rust_analyzer', 'tsserver', 'eslint', 'astro', 'lua_ls', 'prismals', })
-lsp.ensure_installed({
+lsp_zero.setup_servers({ 'rust_analyzer', 'tsserver', 'eslint', 'astro', 'lua_ls', 'prismals', })
+lsp_zero.ensure_installed({
 	'rust_analyzer',
 	'tsserver',
 	'astro',
@@ -83,70 +80,59 @@ lsp.ensure_installed({
 	'prismals',
 });
 
--- Fix Undefined global 'vim'
-lsp.nvim_workspace()
+lsp_zero.on_attach(function(client, bufnr)
+	on_attach_mappings(client, bufnr);
+	on_cursor_hold();
 
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<S-Tab>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<Tab>'] = cmp.mapping.select_next_item(cmp_select),
-	["<cr>"] = cmp.mapping.confirm({ select = true }),
-	["<C-c>"] = cmp.mapping.complete(),
-	["<Esc>"] = cmp.mapping.close(),
-})
+	if client.supports_method("textDocument/formatting") then
+		vim.keymap.set("n", "<Leader>lf", function()
+			vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+		end, { buffer = bufnr, desc = "[lsp] format" })
 
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings
+		-- format on save
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			group = group,
+			callback = function()
+				vim.lsp.buf.format({ bufnr = bufnr, async = false })
+			end,
+			desc = "[lsp] format on save",
+		})
+	end;
+end);
+
+lsp_zero.setup();
+
+-- server's setup
+
+lspconfig.tsserver.setup({
+	on_attach = function(client, bufnr)
+		on_attach_mappings(client, bufnr);
+		on_cursor_hold();
+
+		vim.api.nvim_clear_autocmds({ buffer = bufnr, group = group })
+
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			group = group,
+			callback = function()
+				vim.cmd(":PrettierAsync<CR>");
+			end,
+			desc = "[lsp] format on save",
+		});
+	end,
+	capabilities = capabilities,
+	init_options = {
+		preferences = {
+			disableSuggestions = true
+		}
+	}
 });
 
-lsp.set_preferences({
-	suggest_lsp_servers = false,
-	sign_icons = {
-		error = "E",
-		warning = "W",
-		hint = "H",
-		information = "I",
-		other = "O",
-	}
-})
-
-vim.diagnostic.config({
-	underline = true,
-	virtual_text = false,
-	severity_sort = true,
-	float = {
-		source = "always", -- Or "if_many"
-	},
-})
-
-lsp.format_on_save({
-	format_opts = {
-		async = false,
-		timeout_ms = 10000,
-	},
-	servers = {
-		['prismals'] = { 'prisma' },
-		['lua_ls'] = { 'lua' },
-		['rust_analyzer'] = { 'rust' },
-		['astro'] = { 'astro' },
-		['tsserver'] = { 'javascript', 'typescript', 'typescriptreact' },
-		['eslint'] = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'scss', 'sass', 'html', 'css' },
-	}
-})
-
-local signs = { Error = "E ", Warn = "W ", Hint = "H ", Info = "I " }
-
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-lsp.on_attach(on_attach)
-
-nvim_lsp.rust_analyzer.setup({
+lspconfig.rust_analyzer.setup({
 	on_attach = (function(client)
-		require 'completion'.on_attach(client)
+		require('completion').on_attach(client)
 	end),
 	settings = {
 		["rust-analyzer"] = {
@@ -168,16 +154,14 @@ nvim_lsp.rust_analyzer.setup({
 	}
 });
 
-nvim_lsp.astro.setup({
+lspconfig.astro.setup({
 	on_attach = (function(client)
 		require 'completion'.on_attach(client)
 	end)
 });
 
-nvim_lsp.eslint.setup({
+lspconfig.eslint.setup({
 	on_attach = (function(client)
 		require 'completion'.on_attach(client)
 	end)
 });
-
-lsp.setup()
