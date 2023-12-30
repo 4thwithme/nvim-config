@@ -40,7 +40,11 @@ return require('packer').startup(function(use)
 	});
 
 	use("SmiteshP/nvim-navic");
-	use("utilyre/barbecue.nvim")
+	use("utilyre/barbecue.nvim");
+	use({
+		'nvimdev/lspsaga.nvim',
+		after = 'nvim-lspconfig',
+	})
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
