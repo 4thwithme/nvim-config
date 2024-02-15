@@ -1,6 +1,11 @@
--- JUST A TIP DO NOT UNCOMMENT IT
+return {
+  'mg979/vim-visual-multi',
+  config = function()
+    vim.g.VM_theme = 'neon';
+  end
+}
 
-vim.g.VM_theme = 'neon';
+-- JUST A TIP DO NOT UNCOMMENT IT
 
 -- vim.g:VM_maps = {}
 --

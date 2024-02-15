@@ -26,12 +26,8 @@ vim.opt.termguicolors = true
 -- line wrapping
 vim.opt.wrap = false
 
-
 --  backspace
 vim.opt.backspace = "indent,eol,start"
-
--- clipboard
-vim.opt.clipboard:append("unnamedplus")
 
 -- undodir & backup
 vim.opt.swapfile = false
